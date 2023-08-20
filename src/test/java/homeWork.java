@@ -69,9 +69,9 @@ private WebDriver webDriver;
         WebElement inputAddress = webDriver.findElement(By.id("currentAddress"));
         inputAddress.sendKeys("text");
 
-        webDriver.findElement(By.cssSelector("label[for='uploadPicture']")).sendKeys("operadriver_win64.zip");
-
-//        webDriver.findElement(By.cssSelector("#stateCity-wrapper > div:nth-child(2) > div")).click();
+        webDriver.findElement(By.id("uploadPicture")).sendKeys("operadriver_win64.zip");
+        //State and City
+//        webDriver.findElement(By.cssSelector("#stateCity-wrapper > div:nth-child(2) > div")).click();  
 
 
 
