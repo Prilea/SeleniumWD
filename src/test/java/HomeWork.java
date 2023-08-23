@@ -1,4 +1,5 @@
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -98,16 +99,31 @@ private WebDriver webDriver;
         WebElement heading = webDriver.findElement(By.className("modal-title"));
         Assertions.assertEquals("Thanks for submitting the form", heading.getText());
         Thread.sleep(3000);
+        
+        String answerName = webDriver.findElement(By.cssSelector("tbody > tr:nth-child(1) > td:nth-child(2)")).getText();
+        String answerEmail= webDriver.findElement(By.cssSelector("tbody > tr:nth-child(2) > td:nth-child(2)")).getText();
+        String answerGender= webDriver.findElement(By.cssSelector("tbody > tr:nth-child(3) > td:nth-child(2)")).getText();
+        String answerTel= webDriver.findElement(By.cssSelector("tbody > tr:nth-child(4) > td:nth-child(2)")).getText();
+        String answerDate= webDriver.findElement(By.cssSelector("tbody > tr:nth-child(5) > td:nth-child(2)")).getText();
+        String answerSubject= webDriver.findElement(By.cssSelector("tbody > tr:nth-child(6) > td:nth-child(2)")).getText();
+        String answerHobby= webDriver.findElement(By.cssSelector("tbody > tr:nth-child(7) > td:nth-child(2)")).getText();
+        String answerFile= webDriver.findElement(By.cssSelector("tbody > tr:nth-child(8) > td:nth-child(2)")).getText();
+        String answerAddress= webDriver.findElement(By.cssSelector("tbody > tr:nth-child(9) > td:nth-child(2)")).getText();
+        String answerState= webDriver.findElement(By.cssSelector("tbody > tr:nth-child(10) > td:nth-child(2)")).getText();
 
-        Assertions.assertEquals("Name Last Name", webDriver.findElement(By.cssSelector("tbody > tr:nth-child(1) > td:nth-child(2)")).getText());
-        Assertions.assertEquals("example@mail.ru", webDriver.findElement(By.cssSelector("tbody > tr:nth-child(2) > td:nth-child(2)")).getText());
-        Assertions.assertEquals("Male", webDriver.findElement(By.cssSelector("tbody > tr:nth-child(3) > td:nth-child(2)")).getText());
-        Assertions.assertEquals("5847125369", webDriver.findElement(By.cssSelector("tbody > tr:nth-child(4) > td:nth-child(2)")).getText());
-        Assertions.assertEquals("17 April,1996", webDriver.findElement(By.cssSelector("tbody > tr:nth-child(5) > td:nth-child(2)")).getText());
-        Assertions.assertEquals("Sports, Reading", webDriver.findElement(By.cssSelector("tbody > tr:nth-child(7) > td:nth-child(2)")).getText());
-        Assertions.assertEquals("operadriver_win64.zip", webDriver.findElement(By.cssSelector("tbody > tr:nth-child(8) > td:nth-child(2)")).getText());
-        Assertions.assertEquals("text", webDriver.findElement(By.cssSelector("tbody > tr:nth-child(9) > td:nth-child(2)")).getText());
-        Assertions.assertEquals("NCR Delhi", webDriver.findElement(By.cssSelector("tbody > tr:nth-child(10) > td:nth-child(2)")).getText());
+        SoftAssertions softAssert = new SoftAssertions();
 
+        softAssert.assertThat(answerName).isEqualTo("Name Last Name");
+        softAssert.assertThat(answerEmail).isEqualTo("example@mail.ru");
+        softAssert.assertThat(answerGender).isEqualTo("Male");
+        softAssert.assertThat(answerTel).isEqualTo("5847125369");
+        softAssert.assertThat(answerDate).isEqualTo("17 April,1996");
+        softAssert.assertThat(answerSubject).isEqualTo("Maths");
+        softAssert.assertThat(answerHobby).isEqualTo("Sports, Reading");
+        softAssert.assertThat(answerFile).isEqualTo("operadriver_win64.zip");
+        softAssert.assertThat(answerAddress).isEqualTo("text");
+        softAssert.assertThat(answerState).isEqualTo("NCR Delhi");
+
+        softAssert.assertAll();
     }
 }
